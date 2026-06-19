@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+scikit-learn
+xgboost
+lightgbm
+requests
+matplotlib
+joblib
+openpyxl
+# Uncomment ONLY if a deep-learning model (model_kind == "keras") wins selection:
+# tensorflow-cpu
