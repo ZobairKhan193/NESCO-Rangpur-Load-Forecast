@@ -88,7 +88,7 @@
     "2026-12-16": "Victory Day",
     "2026-12-25": "Christmas Day"
   },
-  "bias_correction": 2.0617608100088063,
+  "bias_correction": -2.386788319625367,
   "weather_vars": [
     "temperature_2m",
     "relative_humidity_2m",
@@ -96,61 +96,61 @@
     "wind_speed_10m",
     "cloud_cover"
   ],
-  "max_valid_demand": 700.0,
+  "max_valid_demand": 400.0,
   "clip_min": 30.0,
-  "clip_max": 700.0,
+  "clip_max": 420.0,
   "power_factor": 0.9,
   "lat": 25.7439,
   "lon": 89.2752,
   "tz": "Asia/Dhaka",
-  "trained_at": "2026-06-19T15:30:09",
+  "trained_at": "2026-06-23T10:16:11",
   "data_range": [
     "2024-01-01 00:00:00",
-    "2026-06-18 23:00:00"
+    "2026-06-22 23:00:00"
   ],
   "holdout_leaderboard": [
     {
-      "model": "XGBoost",
-      "kind": "xgboost",
-      "mape": 2.1777828317815646,
-      "mae": 6.653429690483943,
-      "rmse": 10.586824663018827
-    },
-    {
       "model": "LightGBM",
       "kind": "lightgbm",
-      "mape": 2.2124867121897753,
-      "mae": 6.739063657345671,
-      "rmse": 10.809422025923055
+      "mape": 2.18457654033561,
+      "mae": 6.523808450228019,
+      "rmse": 9.8110437093874
+    },
+    {
+      "model": "XGBoost",
+      "kind": "xgboost",
+      "mape": 2.23959840505467,
+      "mae": 6.715349554511178,
+      "rmse": 10.046493507638367
     },
     {
       "model": "BiGRU+Attn",
       "kind": "keras",
-      "mape": 2.4646100279131598,
-      "mae": 7.466782229817708,
-      "rmse": 11.117278653123135
+      "mape": 2.516708852380113,
+      "mae": 7.3336141344536685,
+      "rmse": 10.34145684489777
     },
     {
       "model": "BiLSTM+Attn",
       "kind": "keras",
-      "mape": 9.845590132519828,
-      "mae": 28.329970669080947,
-      "rmse": 34.3717413699858
+      "mape": 12.992607231949323,
+      "mae": 35.72576111219618,
+      "rmse": 42.44096092003364
     },
     {
       "model": "CNN-LSTM",
       "kind": "keras",
-      "mape": 10.642381470891548,
-      "mae": 30.25673392917209,
-      "rmse": 36.701293603316586
+      "mape": 13.978649163869461,
+      "mae": 38.4288409121365,
+      "rmse": 45.3123945197819
     }
   ],
   "backtest_leaderboard": {
-    "XGBoost": 3.830950870187973,
-    "LightGBM": 3.7746786786285855,
-    "BiGRU+Attn": 3.8786704870352824,
-    "BiLSTM+Attn": 10.036367233651191,
-    "CNN-LSTM": 10.687839338094657
+    "XGBoost": 4.41702838940053,
+    "LightGBM": 4.390738722539007,
+    "BiGRU+Attn": 4.8145627329378495,
+    "BiLSTM+Attn": 13.193493000856623,
+    "CNN-LSTM": 13.92075979099835
   },
-  "selected_backtest_mape": 3.7746786786285855
+  "selected_backtest_mape": 4.390738722539007
 }
