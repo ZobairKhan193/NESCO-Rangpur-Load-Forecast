@@ -1,6 +1,6 @@
 {
-  "model_name": "LightGBM",
-  "model_kind": "lightgbm",
+  "model_name": "XGBoost",
+  "model_kind": "xgboost",
   "model_file": "best_model.pkl",
   "feature_columns": [
     "hour",
@@ -88,7 +88,7 @@
     "2026-12-16": "Victory Day",
     "2026-12-25": "Christmas Day"
   },
-  "bias_correction": -2.386788319625367,
+  "bias_correction": -3.237683105468733,
   "weather_vars": [
     "temperature_2m",
     "relative_humidity_2m",
@@ -103,54 +103,54 @@
   "lat": 25.7439,
   "lon": 89.2752,
   "tz": "Asia/Dhaka",
-  "trained_at": "2026-06-23T10:16:11",
+  "trained_at": "2026-07-02T06:57:13",
   "data_range": [
     "2024-01-01 00:00:00",
-    "2026-06-22 23:00:00"
+    "2026-07-01 23:00:00"
   ],
   "holdout_leaderboard": [
     {
-      "model": "LightGBM",
-      "kind": "lightgbm",
-      "mape": 2.18457654033561,
-      "mae": 6.523808450228019,
-      "rmse": 9.8110437093874
-    },
-    {
       "model": "XGBoost",
       "kind": "xgboost",
-      "mape": 2.23959840505467,
-      "mae": 6.715349554511178,
-      "rmse": 10.046493507638367
+      "mape": 2.524469780610001,
+      "mae": 7.229503253512911,
+      "rmse": 11.66484884198624
+    },
+    {
+      "model": "LightGBM",
+      "kind": "lightgbm",
+      "mape": 2.5953287675749137,
+      "mae": 7.426153331208459,
+      "rmse": 12.045478709764671
     },
     {
       "model": "BiGRU+Attn",
       "kind": "keras",
-      "mape": 2.516708852380113,
-      "mae": 7.3336141344536685,
-      "rmse": 10.34145684489777
-    },
-    {
-      "model": "BiLSTM+Attn",
-      "kind": "keras",
-      "mape": 12.992607231949323,
-      "mae": 35.72576111219618,
-      "rmse": 42.44096092003364
+      "mape": 3.002665593748782,
+      "mae": 8.528113827175563,
+      "rmse": 12.662738381588051
     },
     {
       "model": "CNN-LSTM",
       "kind": "keras",
-      "mape": 13.978649163869461,
-      "mae": 38.4288409121365,
-      "rmse": 45.3123945197819
+      "mape": 10.174248609943714,
+      "mae": 27.390126746283638,
+      "rmse": 33.45920879362384
+    },
+    {
+      "model": "BiLSTM+Attn",
+      "kind": "keras",
+      "mape": 10.375298872633325,
+      "mae": 27.84819026692708,
+      "rmse": 34.04095311522523
     }
   ],
   "backtest_leaderboard": {
-    "XGBoost": 4.41702838940053,
-    "LightGBM": 4.390738722539007,
-    "BiGRU+Attn": 4.8145627329378495,
-    "BiLSTM+Attn": 13.193493000856623,
-    "CNN-LSTM": 13.92075979099835
+    "XGBoost": 4.458445560450412,
+    "LightGBM": 4.5333858788433306,
+    "BiGRU+Attn": 4.958878420588723,
+    "BiLSTM+Attn": 10.63263048573277,
+    "CNN-LSTM": 10.335897428883044
   },
-  "selected_backtest_mape": 4.390738722539007
+  "selected_backtest_mape": 4.458445560450412
 }
