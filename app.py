@@ -37,7 +37,7 @@ st.markdown("""
 :root{
   --accent:#e0723a; --accent-soft:rgba(224,114,58,0.14);
   --purple:#7c3aed; --teal:#0d9488; --emerald:#10b981; --emerald-txt:#6ee7b7;
-  --red:#ff8a80; --blue:#2f6fed; --amber:#c2892f;
+  --red:#dc2626; --blue:#2f6fed; --amber:#c2892f;
   --page:#0b1120; --panel:#0f1b30; --line:#233049;
   --ink:#e2e8f0; --muted:#94a3b8; --dim:#64748b;
   --navy:linear-gradient(120deg,#101d34 0%,#0f1b30 60%,#0d192c 100%);
@@ -73,16 +73,26 @@ h1,h2,h3,h4 {color: var(--ink); letter-spacing:-0.01em;}
 .pill-live {background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.4); color:var(--emerald-txt);}
 .pill .dot {width:7px; height:7px; border-radius:50%; background:var(--emerald);}
 
-/* cards */
-.card {background:var(--panel); border:1px solid var(--line); border-radius:16px;
-    padding:1.05rem 1.15rem; box-shadow:0 1px 2px rgba(0,0,0,0.25);}
-.card .label {font-family:'IBM Plex Mono', monospace; font-size:.68rem; color:var(--muted);
+/* cards — off-white boxes on the dark page (dark text inside) */
+.card {background:#f6f8fb; border:1px solid #e4e9f2; border-radius:16px; color:#0f172a;
+    padding:1.05rem 1.15rem; box-shadow:0 4px 14px rgba(0,0,0,0.28);}
+.card .label {font-family:'IBM Plex Mono', monospace; font-size:.68rem; color:#64748b;
     text-transform:uppercase; letter-spacing:.12em; display:flex; align-items:center; gap:.45rem;}
 .card .cdot {width:8px; height:8px; border-radius:50%; display:inline-block;}
 .card .value {font-family:'IBM Plex Mono', monospace; font-size:1.7rem; font-weight:600;
-    color:var(--ink); margin-top:.35rem; letter-spacing:-0.01em;}
-.card .value .u {font-size:.78rem; color:var(--muted); font-weight:500; margin-left:.2rem;}
-.card .sub {font-family:'IBM Plex Mono', monospace; font-size:.7rem; color:var(--dim); margin-top:.4rem;}
+    color:#0f172a; margin-top:.35rem; letter-spacing:-0.01em;}
+.card .value .u {font-size:.78rem; color:#64748b; font-weight:500; margin-left:.2rem;}
+.card .sub {font-family:'IBM Plex Mono', monospace; font-size:.7rem; color:#94a3b8; margin-top:.4rem;}
+/* dark-context helpers re-colored for the off-white cards */
+.card .sec {color:#64748b;}
+.card .bignum {color:#0f172a;}
+.card .badge-teal {background:rgba(13,148,136,0.12); border:1px solid rgba(13,148,136,0.4); color:#0f766e;}
+.card .badge-teal .dot {background:#0d9488;}
+.card .evt th {color:#64748b;}
+.card .evt td {color:#334155; border-top:1px solid #e4e9f2;}
+.card .evt td.num {color:#64748b;}
+.card .evt tr.best td {color:#0f172a;}
+.card .evt tr.best td.num {color:#e0723a;}
 
 /* badges */
 .badge {display:inline-flex; align-items:center; gap:.45rem; background:var(--accent);
