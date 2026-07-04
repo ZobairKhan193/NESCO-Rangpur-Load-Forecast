@@ -1,0 +1,8 @@
+# App theme — matches the "NESCO Load Forecast Dashboard" design
+# (light slate UI, teal accent, IBM Plex fonts are applied via CSS in app.py).
+[theme]
+base = "light"
+primaryColor = "#0d9488"
+backgroundColor = "#f6f8fb"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#0f172a"

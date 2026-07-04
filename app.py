@@ -33,29 +33,54 @@ st.set_page_config(page_title="NESCO Rangpur Load Forecast", page_icon="⚡",
 
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+:root{
+  --accent:#0d9488; --accent-2:#10b981; --danger:#c15650;
+  --ink:#0f172a; --muted:#64748b; --muted-2:#94a3b8;
+  --line:#e2e8f0; --page:#f6f8fb; --card:#ffffff;
+  --navy:linear-gradient(120deg,#101d34 0%,#0f1b30 60%,#0d192c 100%);
+}
 #MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
 header {visibility: hidden;}
-.block-container {padding-top: 1.5rem;}
+html, body, .stApp, [class*="css"], .stMarkdown {
+  font-family:'IBM Plex Sans', system-ui, sans-serif; color: var(--ink);
+}
+.stApp {background: var(--page);}
+.block-container {padding-top: 1.4rem;}
+h1,h2,h3,h4 {color: var(--ink); letter-spacing:-0.01em;}
 .hero {
-    background: linear-gradient(120deg, #0b6e4f 0%, #1d976c 50%, #2fa37a 100%);
-    color: white; padding: 1.4rem 1.8rem; border-radius: 14px; margin-bottom: 1.2rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    background: var(--navy); color: #fff; padding: 1.4rem 1.8rem;
+    border-radius: 16px; margin-bottom: 1.2rem;
+    border: 1px solid rgba(13,148,136,0.28);
+    box-shadow: 0 2px 8px rgba(15,23,42,0.20);
 }
-.hero h1 {margin: 0; font-size: 1.7rem;}
-.hero p {margin: 0.3rem 0 0 0; opacity: 0.92;}
+.hero h1 {margin: 0; font-size: 1.7rem; font-weight: 600; color: #fff;}
+.hero p {margin: 0.35rem 0 0 0; color: #cbd5e1; font-size: .95rem;}
 .card {
-    background: var(--secondary-background-color); border-radius: 12px;
-    padding: 1rem 1.1rem; border: 1px solid rgba(125,125,125,0.18);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 1rem 1.1rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
 }
-.card .label {font-size: 0.8rem; opacity: 0.7; text-transform: uppercase; letter-spacing: .04em;}
-.card .value {font-size: 1.55rem; font-weight: 700; margin-top: .15rem;}
+.card .label {
+    font-family:'IBM Plex Mono', monospace; font-size: .72rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .12em;
+}
+.card .value {
+    font-family:'IBM Plex Mono', monospace; font-size: 1.55rem; font-weight: 600;
+    color: var(--ink); margin-top: .2rem;
+}
 .badge {
-    display: inline-block; background: #0b6e4f; color: white; padding: .25rem .6rem;
-    border-radius: 8px; font-weight: 600; font-size: .9rem;
+    display: inline-block; background: var(--accent); color: #fff; padding: .28rem .7rem;
+    border-radius: 999px; font-weight: 600; font-size: .85rem; letter-spacing: .02em;
+    box-shadow: 0 4px 14px rgba(13,148,136,0.35);
 }
-.app-footer {text-align: center; opacity: 0.65; font-size: .8rem; margin-top: 2.5rem;}
+.stButton > button[kind="primary"] {
+    background: var(--accent); border: 0; box-shadow: 0 4px 14px rgba(13,148,136,0.35);
+}
+.app-footer {
+    text-align: center; color: var(--muted-2); font-size: .8rem; margin-top: 2.5rem;
+    font-family:'IBM Plex Mono', monospace; letter-spacing: .04em;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -373,7 +398,7 @@ with c2:
     if not tbl.empty:
         best_name = cfg["model_name"]
         st.dataframe(tbl.style.apply(
-            lambda r: ["background-color: rgba(11,110,79,0.18)" if r["Model"] == best_name
+            lambda r: ["background-color: rgba(13,148,136,0.16)" if r["Model"] == best_name
                        else "" for _ in r], axis=1),
             hide_index=True, use_container_width=True)
 
