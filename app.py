@@ -518,6 +518,20 @@ if "fc" in st.session_state:
     target_date = st.session_state["fc_date"]
     date_str = target_date.strftime("%Y-%m-%d")
 
+    # ---- downloads: placed right below the Generate Forecast button ----
+    ois = build_ois(fc, target_date, cfg.get("power_factor", 0.9))
+    xbuf = io.BytesIO()
+    with pd.ExcelWriter(xbuf, engine="openpyxl") as xw:
+        ois.to_excel(xw, sheet_name="forecast", index=False)
+    d1, d2 = st.columns(2)
+    d1.download_button("⬇️ Download OIS file (.xlsx)", xbuf.getvalue(),
+                       file_name=f"NESCO-Rangpur_forecast_{date_str}.xlsx",
+                       mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                       use_container_width=True)
+    d2.download_button("⬇️ Download CSV", fc.to_csv(index=False).encode(),
+                       file_name=f"NESCO-Rangpur_forecast_{date_str}.csv", mime="text/csv",
+                       use_container_width=True)
+
     # summary cards (coloured dot + sub-caption, matching the design)
     peak, mn, avg = fc.Forecast_MW.max(), fc.Forecast_MW.min(), fc.Forecast_MW.mean()
     energy = fc.Forecast_MW.sum()
@@ -542,22 +556,10 @@ if "fc" in st.session_state:
     chart = fc.set_index("Time")["Forecast_MW"]
     st.line_chart(chart, height=300, color="#0d9488")
 
-    ois = build_ois(fc, target_date, cfg.get("power_factor", 0.9))
     st.markdown('<div class="sec" style="margin-top:1rem">OIS table</div>', unsafe_allow_html=True)
     st.dataframe(ois, hide_index=True, use_container_width=True)
     st.caption("MVAR computed at power factor 0.9; half-hourly rows (18:30, 19:30) = "
                "average of the adjacent hourly values.")
-
-    # downloads
-    xbuf = io.BytesIO()
-    with pd.ExcelWriter(xbuf, engine="openpyxl") as xw:
-        ois.to_excel(xw, sheet_name="forecast", index=False)
-    d1, d2 = st.columns(2)
-    d1.download_button("⬇️ Download OIS file (.xlsx)", xbuf.getvalue(),
-                       file_name=f"NESCO-Rangpur_forecast_{date_str}.xlsx",
-                       mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    d2.download_button("⬇️ Download CSV", fc.to_csv(index=False).encode(),
-                       file_name=f"NESCO-Rangpur_forecast_{date_str}.csv", mime="text/csv")
 
 # ---- Footer ----
 year = datetime.now().year
