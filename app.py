@@ -35,52 +35,94 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 :root{
-  --accent:#0d9488; --accent-2:#10b981; --danger:#c15650;
-  --ink:#0f172a; --muted:#64748b; --muted-2:#94a3b8;
-  --line:#e2e8f0; --page:#f6f8fb; --card:#ffffff;
+  --accent:#e0723a; --accent-soft:rgba(224,114,58,0.14);
+  --purple:#7c3aed; --teal:#0d9488; --emerald:#10b981; --emerald-txt:#6ee7b7;
+  --red:#ff8a80; --blue:#2f6fed; --amber:#c2892f;
+  --page:#0b1120; --panel:#0f1b30; --line:#233049;
+  --ink:#e2e8f0; --muted:#94a3b8; --dim:#64748b;
   --navy:linear-gradient(120deg,#101d34 0%,#0f1b30 60%,#0d192c 100%);
 }
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
+#MainMenu, footer, header {visibility: hidden;}
 html, body, .stApp, [class*="css"], .stMarkdown {
   font-family:'IBM Plex Sans', system-ui, sans-serif; color: var(--ink);
 }
 .stApp {background: var(--page);}
-.block-container {padding-top: 1.4rem;}
+.block-container {padding-top: 1.2rem;}
 h1,h2,h3,h4 {color: var(--ink); letter-spacing:-0.01em;}
-.hero {
-    background: var(--navy); color: #fff; padding: 1.4rem 1.8rem;
-    border-radius: 16px; margin-bottom: 1.2rem;
-    border: 1px solid rgba(13,148,136,0.28);
-    box-shadow: 0 2px 8px rgba(15,23,42,0.20);
-}
-.hero h1 {margin: 0; font-size: 1.7rem; font-weight: 600; color: #fff;}
-.hero p {margin: 0.35rem 0 0 0; color: #cbd5e1; font-size: .95rem;}
-.card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
-    padding: 1rem 1.1rem; box-shadow: 0 1px 2px rgba(15,23,42,0.04);
-}
-.card .label {
-    font-family:'IBM Plex Mono', monospace; font-size: .72rem; color: var(--muted);
-    text-transform: uppercase; letter-spacing: .12em;
-}
-.card .value {
-    font-family:'IBM Plex Mono', monospace; font-size: 1.55rem; font-weight: 600;
-    color: var(--ink); margin-top: .2rem;
-}
-.badge {
-    display: inline-block; background: var(--accent); color: #fff; padding: .28rem .7rem;
-    border-radius: 999px; font-weight: 600; font-size: .85rem; letter-spacing: .02em;
-    box-shadow: 0 4px 14px rgba(13,148,136,0.35);
-}
-.stButton > button[kind="primary"] {
-    background: var(--accent); border: 0; box-shadow: 0 4px 14px rgba(13,148,136,0.35);
-}
-.app-footer {
-    text-align: center; color: var(--muted-2); font-size: .8rem; margin-top: 2.5rem;
-    font-family:'IBM Plex Mono', monospace; letter-spacing: .04em;
-}
+.mono {font-family:'IBM Plex Mono', monospace;}
+.sec {font-family:'IBM Plex Mono', monospace; font-size:.68rem; color:var(--muted);
+      text-transform:uppercase; letter-spacing:.14em; margin:.1rem 0 .5rem 0;}
+
+/* hero */
+.hero {position:relative; background:var(--navy); border:1px solid var(--line);
+    border-radius:16px; padding:1.2rem 1.5rem 1.2rem 1.6rem; margin-bottom:1.1rem;
+    box-shadow:0 2px 10px rgba(0,0,0,0.35); overflow:hidden;}
+.hero::before {content:""; position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--accent);}
+.hero-row {display:flex; align-items:center; gap:.9rem;}
+.hero-ico {width:44px; height:44px; border-radius:12px; background:rgba(13,148,136,0.16);
+    border:1px solid rgba(13,148,136,0.35); display:flex; align-items:center;
+    justify-content:center; font-size:1.25rem; flex:0 0 auto;}
+.hero h1 {margin:0; font-size:1.5rem; font-weight:600; color:#fff;}
+.hero p {margin:.15rem 0 0 0; color:var(--muted); font-size:.88rem;}
+.grow {flex:1 1 auto;}
+
+/* pills */
+.pill {display:inline-flex; align-items:center; gap:.45rem; padding:.32rem .75rem;
+    border-radius:999px; font-size:.72rem; font-weight:600; letter-spacing:.09em;
+    text-transform:uppercase; font-family:'IBM Plex Mono', monospace;}
+.pill-live {background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.4); color:var(--emerald-txt);}
+.pill .dot {width:7px; height:7px; border-radius:50%; background:var(--emerald);}
+
+/* cards */
+.card {background:var(--panel); border:1px solid var(--line); border-radius:16px;
+    padding:1.05rem 1.15rem; box-shadow:0 1px 2px rgba(0,0,0,0.25);}
+.card .label {font-family:'IBM Plex Mono', monospace; font-size:.68rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.12em; display:flex; align-items:center; gap:.45rem;}
+.card .cdot {width:8px; height:8px; border-radius:50%; display:inline-block;}
+.card .value {font-family:'IBM Plex Mono', monospace; font-size:1.7rem; font-weight:600;
+    color:var(--ink); margin-top:.35rem; letter-spacing:-0.01em;}
+.card .value .u {font-size:.78rem; color:var(--muted); font-weight:500; margin-left:.2rem;}
+.card .sub {font-family:'IBM Plex Mono', monospace; font-size:.7rem; color:var(--dim); margin-top:.4rem;}
+
+/* badges */
+.badge {display:inline-flex; align-items:center; gap:.45rem; background:var(--accent);
+    color:#0b1120; padding:.3rem .75rem; border-radius:999px; font-weight:600; font-size:.82rem;
+    font-family:'IBM Plex Mono', monospace;}
+.badge .dot {width:7px; height:7px; border-radius:50%; background:#0b1120;}
+.badge-teal {background:rgba(13,148,136,0.14); border:1px solid rgba(13,148,136,0.45);
+    color:#5eead4;}
+.badge-teal .dot {background:#0d9488;}
+.bignum {font-family:'IBM Plex Mono', monospace; font-size:2rem; font-weight:600; color:var(--ink); line-height:1;}
+.bignum .p {font-size:1rem; color:var(--accent); margin-left:.1rem;}
+
+/* sidebar user */
+.avatar {width:38px; height:38px; border-radius:10px; background:var(--accent); color:#0b1120;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    font-family:'IBM Plex Mono', monospace; flex:0 0 auto;}
+.side-user {display:flex; align-items:center; gap:.6rem;}
+.side-user .nm {font-weight:600; color:var(--ink); font-size:.95rem; line-height:1.1;}
+.side-user .rl {font-family:'IBM Plex Mono', monospace; font-size:.6rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.14em;}
+.kv {display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem; margin:.28rem 0;}
+.kv .k {color:var(--dim);} .kv .v {color:var(--ink);}
+
+/* models-evaluated table */
+.evt {width:100%; border-collapse:collapse; font-size:.86rem;}
+.evt th {font-family:'IBM Plex Mono', monospace; font-size:.62rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.1em; text-align:right; padding:.2rem .3rem .55rem; font-weight:600;}
+.evt th:first-child {text-align:left;}
+.evt td {padding:.5rem .3rem; border-top:1px solid var(--line); font-family:'IBM Plex Mono', monospace;}
+.evt td.num {text-align:right; color:var(--muted);}
+.evt tr.best td {color:var(--ink);}
+.evt tr.best td.num {color:var(--accent);}
+.evt .mdot {width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:.55rem; vertical-align:middle;}
+
+/* primary (purple) button + card wrappers */
+.stButton > button[kind="primary"] {background:var(--purple); border:0; border-radius:10px;
+    font-weight:600; box-shadow:0 4px 14px rgba(124,58,237,0.35);}
+.app-footer {text-align:center; color:var(--dim); font-size:.75rem; margin-top:2.5rem;
+    font-family:'IBM Plex Mono', monospace; letter-spacing:.04em;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -341,6 +383,21 @@ def accuracy_table(cfg):
         df = df.sort_values("Day-ahead MAPE (%)", na_position="last").reset_index(drop=True)
     return df
 
+def models_eval_html(cfg):
+    """Custom dark table with a coloured dot per model (best = orange)."""
+    tbl, best = accuracy_table(cfg), cfg["model_name"]
+    body = ""
+    for _, r in tbl.iterrows():
+        is_best = r["Model"] == best
+        dot = "var(--accent)" if is_best else "var(--dim)"
+        da = "—" if pd.isna(r["Day-ahead MAPE (%)"]) else f'{r["Day-ahead MAPE (%)"]:.2f}'
+        ho = "—" if pd.isna(r["Holdout MAPE (%)"]) else f'{r["Holdout MAPE (%)"]:.2f}'
+        body += (f'<tr class="{"best" if is_best else ""}">'
+                 f'<td><span class="mdot" style="background:{dot}"></span>{r["Model"]}</td>'
+                 f'<td class="num">{da}</td><td class="num">{ho}</td></tr>')
+    return ('<table class="evt"><tr><th>Model</th><th>Day-ahead</th>'
+            f'<th>Holdout</th></tr>{body}</table>')
+
 # --------------------------------------------------------------------------- #
 # App body
 # --------------------------------------------------------------------------- #
@@ -361,56 +418,81 @@ data_through = cfg.get("data_range", ["?", "?"])[1]
 
 # ---- Sidebar ----
 with st.sidebar:
-    st.markdown(f"**👤 {st.session_state.get('user','user')}**")
-    if st.button("Sign out"):
+    user = st.session_state.get("user", "user")
+    initials = ("".join(p[0] for p in user.split()[:2]) or user[:2]).upper()
+    st.markdown(f'<div class="side-user"><div class="avatar">{initials}</div>'
+                f'<div><div class="nm">{user}</div>'
+                f'<div class="rl">System Planning</div></div></div>', unsafe_allow_html=True)
+    if st.button("Sign out", use_container_width=True):
         st.session_state.clear()
         st.rerun()
-    st.divider()
-    st.markdown("### 🏆 Best model")
-    st.markdown(f'<span class="badge">{cfg["model_name"]}</span>', unsafe_allow_html=True)
+    st.markdown('<div class="sec" style="margin-top:1rem">Best model</div>', unsafe_allow_html=True)
+    st.markdown(f'<span class="badge"><span class="dot"></span>{cfg["model_name"]}</span>',
+                unsafe_allow_html=True)
     if best_mape is not None:
-        st.metric("Day-ahead MAPE (backtest)", f"{best_mape:.2f}%")
-    st.caption(f"Trained: {trained_at}")
-    st.caption(f"Data through: {data_through}")
-    st.caption(f"Last actual: {last_actual}")
-    # staleness warning
+        st.markdown('<div class="sec" style="margin-top:.9rem">Day-ahead MAPE · backtest</div>',
+                    unsafe_allow_html=True)
+        st.markdown(f'<div class="bignum">{best_mape:.2f}<span class="p">%</span></div>',
+                    unsafe_allow_html=True)
+    st.markdown(
+        '<div style="margin-top:1rem">'
+        f'<div class="kv"><span class="k">Trained</span><span class="v">{str(trained_at)[:16].replace("T"," ")}</span></div>'
+        f'<div class="kv"><span class="k">Data through</span><span class="v">{str(data_through)[:16]}</span></div>'
+        f'<div class="kv"><span class="k">Last actual</span><span class="v">{str(last_actual)[:16]}</span></div>'
+        '</div>', unsafe_allow_html=True)
     age_days = (pd.Timestamp.now() - last_actual).days
     if age_days > 10:
         st.warning(f"⚠️ History is {age_days} days old — retrain soon.")
-    with st.expander("📊 Models tested (accuracy)"):
+    with st.expander("Models tested (accuracy)"):
         st.dataframe(accuracy_table(cfg), hide_index=True, use_container_width=True)
 
 # ---- Hero ----
-st.markdown('<div class="hero"><h1>⚡ NESCO Rangpur — Hourly Load Forecast</h1>'
-            '<p>Day-ahead demand forecasting · System Planning, NESCO</p></div>',
-            unsafe_allow_html=True)
+st.markdown(
+    '<div class="hero"><div class="hero-row">'
+    '<div class="hero-ico">⚡</div>'
+    '<div class="grow"><h1>NESCO Rangpur — Hourly Load Forecast</h1>'
+    '<p>Day-ahead demand forecasting · System Planning, NESCO</p></div>'
+    '<span class="pill pill-live"><span class="dot"></span>Model Live</span>'
+    '</div></div>', unsafe_allow_html=True)
 
-# ---- Landing: selected model + evaluation table ----
-c1, c2 = st.columns([1, 2])
+# ---- Landing: selected model card + models-evaluated table ----
+c1, c2 = st.columns([1, 2], gap="medium")
 with c1:
-    st.markdown("#### Selected model")
-    st.markdown(f'<span class="badge">{cfg["model_name"]}</span>', unsafe_allow_html=True)
-    if best_mape is not None:
-        st.caption(f"Day-ahead MAPE: **{best_mape:.2f}%**")
+    st.markdown(
+        '<div class="card"><div class="sec">Selected model</div>'
+        f'<span class="badge badge-teal"><span class="dot"></span>{cfg["model_name"]}</span>'
+        '<div class="sec" style="margin-top:1rem">Day-ahead MAPE</div>'
+        + (f'<div class="bignum">{best_mape:.2f}<span class="p">%</span></div>'
+           if best_mape is not None else '<div class="bignum">—</div>')
+        + '<div style="color:var(--dim);font-size:.8rem;margin-top:.8rem;line-height:1.4">'
+        'Lowest error across the evaluated set. Click a row in the table to compare.</div>'
+        '</div>', unsafe_allow_html=True)
 with c2:
-    st.markdown("#### Models evaluated")
-    tbl = accuracy_table(cfg)
-    if not tbl.empty:
-        best_name = cfg["model_name"]
-        st.dataframe(tbl.style.apply(
-            lambda r: ["background-color: rgba(13,148,136,0.16)" if r["Model"] == best_name
-                       else "" for _ in r], axis=1),
-            hide_index=True, use_container_width=True)
+    n_models = len(accuracy_table(cfg))
+    st.markdown(
+        '<div class="card">'
+        '<div style="display:flex;justify-content:space-between;align-items:baseline">'
+        '<div class="sec">Models evaluated</div>'
+        f'<div class="sec">{n_models} models · MAPE %</div></div>'
+        + models_eval_html(cfg) + '</div>', unsafe_allow_html=True)
 
-st.divider()
-
-# ---- Date picker + generate ----
+# ---- Target date + generate (button raised next to the date for easy click) ----
+st.markdown('<div class="sec" style="margin-top:1.2rem">Target date</div>', unsafe_allow_html=True)
 today = pd.Timestamp.now(tz=TZ).normalize().tz_localize(None)
-sel = st.date_input("Target date", value=(today + pd.Timedelta(days=1)).date(),
-                    min_value=today.date(), max_value=(today + pd.Timedelta(days=2)).date())
+dcol, bcol, scol = st.columns([2, 1.5, 2], gap="medium")
+with dcol:
+    sel = st.date_input("Target date", value=(today + pd.Timedelta(days=1)).date(),
+                        min_value=today.date(), max_value=(today + pd.Timedelta(days=2)).date(),
+                        label_visibility="collapsed")
 target_date = pd.Timestamp(sel)
+with bcol:
+    go = st.button("⚡ Generate Forecast", type="primary", use_container_width=True)
+with scol:
+    st.markdown('<div style="text-align:right;padding-top:.35rem">'
+                '<span class="pill pill-live"><span class="dot"></span>Forecast ready · run</span>'
+                '</div>', unsafe_allow_html=True)
 
-if st.button("🚀 Generate Forecast", type="primary"):
+if go:
     bar = st.progress(0.0, text="Starting…")
     try:
         fc = run_forecast(cfg, model, feat_scaler, target_scaler, history, target_date, bar)
@@ -426,23 +508,32 @@ if "fc" in st.session_state:
     target_date = st.session_state["fc_date"]
     date_str = target_date.strftime("%Y-%m-%d")
 
-    # summary cards
+    # summary cards (coloured dot + sub-caption, matching the design)
     peak, mn, avg = fc.Forecast_MW.max(), fc.Forecast_MW.min(), fc.Forecast_MW.mean()
     energy = fc.Forecast_MW.sum()
-    cols = st.columns(4)
-    for col, label, val, unit in [
-        (cols[0], "Peak", peak, "MW"), (cols[1], "Minimum", mn, "MW"),
-        (cols[2], "Average", avg, "MW"), (cols[3], "Energy", energy, "MWh")]:
-        col.markdown(f'<div class="card"><div class="label">{label}</div>'
-                     f'<div class="value">{val:,.1f} <span style="font-size:.8rem">{unit}</span>'
-                     f'</div></div>', unsafe_allow_html=True)
+    peak_h = fc.loc[fc.Forecast_MW.idxmax(), "Time"].strftime("%H:00")
+    min_h = fc.loc[fc.Forecast_MW.idxmin(), "Time"].strftime("%H:00")
+    metrics = [
+        ("Peak", f"{peak:,.1f}", "MW", "var(--red)", f"at {peak_h}"),
+        ("Minimum", f"{mn:,.1f}", "MW", "var(--blue)", f"at {min_h}"),
+        ("Average", f"{avg:,.1f}", "MW", "var(--accent)", "24h mean"),
+        ("Energy", f"{energy:,.0f}", "MWh", "var(--amber)", "day-ahead total"),
+    ]
+    cols = st.columns(4, gap="medium")
+    for col, (label, val, unit, dot, sub) in zip(cols, metrics):
+        col.markdown(
+            f'<div class="card"><div class="label">'
+            f'<span class="cdot" style="background:{dot}"></span>{label}</div>'
+            f'<div class="value">{val}<span class="u">{unit}</span></div>'
+            f'<div class="sub">{sub}</div></div>', unsafe_allow_html=True)
 
-    st.markdown(f"#### Hourly forecast — {date_str}")
+    st.markdown(f'<div class="sec" style="margin-top:1.3rem">Hourly forecast — {date_str}</div>',
+                unsafe_allow_html=True)
     chart = fc.set_index("Time")["Forecast_MW"]
-    st.line_chart(chart, height=320)
+    st.line_chart(chart, height=300, color="#0d9488")
 
     ois = build_ois(fc, target_date, cfg.get("power_factor", 0.9))
-    st.markdown("#### OIS table")
+    st.markdown('<div class="sec" style="margin-top:1rem">OIS table</div>', unsafe_allow_html=True)
     st.dataframe(ois, hide_index=True, use_container_width=True)
     st.caption("MVAR computed at power factor 0.9; half-hourly rows (18:30, 19:30) = "
                "average of the adjacent hourly values.")
