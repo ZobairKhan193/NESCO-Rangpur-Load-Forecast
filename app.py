@@ -106,8 +106,18 @@ def check_login():
 # --------------------------------------------------------------------------- #
 # Load artifacts (cached)
 # --------------------------------------------------------------------------- #
+def artifacts_version(art_dir):
+    """Newest mtime across the artifact files — used as a cache key so that when new
+    artifacts land (e.g. after a weekly update), the app reloads them WITHOUT needing a
+    manual reboot. (`version` is a real arg, not underscore-prefixed, so it is hashed.)"""
+    files = ["config.json", "best_model.pkl", "best_model.keras",
+             "feat_scaler.pkl", "target_scaler.pkl", "history_tail.csv"]
+    mtimes = [os.path.getmtime(os.path.join(art_dir, f))
+              for f in files if os.path.exists(os.path.join(art_dir, f))]
+    return max(mtimes, default=0.0)
+
 @st.cache_resource(show_spinner="Loading model & artifacts…")
-def load_artifacts(art_dir):
+def load_artifacts(art_dir, version):
     with open(os.path.join(art_dir, "config.json")) as f:
         config = json.load(f)
     feat_scaler = joblib.load(os.path.join(art_dir, "feat_scaler.pkl"))
@@ -316,7 +326,8 @@ if not os.path.exists(os.path.join(ARTIFACT_DIR, "config.json")):
              "Upload the 5 files into an `artifacts/` folder.")
     st.stop()
 
-cfg, model, feat_scaler, target_scaler, history = load_artifacts(ARTIFACT_DIR)
+cfg, model, feat_scaler, target_scaler, history = load_artifacts(
+    ARTIFACT_DIR, artifacts_version(ARTIFACT_DIR))
 
 best_mape = cfg.get("selected_backtest_mape")
 last_actual = history.index.max()
